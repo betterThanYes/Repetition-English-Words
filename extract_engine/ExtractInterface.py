@@ -11,3 +11,4 @@ class ExtractInterface(ABC):
 	@abstractmethod
 	def parse(cls,path:str)->List[WordModel]:
 		pass
+	
