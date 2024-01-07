@@ -1,7 +1,3 @@
-"""
-	Define WordModel 
-"""
-
 class WordModel:
 	def __init__(self,word:str,spelling:str,definition:str,vietnam_def:str,example:str,level:str):
 		self.word = word

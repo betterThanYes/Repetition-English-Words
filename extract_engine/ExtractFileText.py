@@ -10,10 +10,9 @@ class ExtractFileText(ExtractInterface):
 		else:
 			with open(path,'r',encoding='utf-8') as outfile:
 				#content = content.replace("-","") outfile.read()
-				cleaned_string = re.sub('[^a-zA-Z\\s-]', '', outfile.read())
+				cleaned_string = re.sub('[^a-zA-Z\\s\'-]', '', outfile.read())
 				#print(cleaned_string)
-				list_of_word = list(set(cleaned_string.split()))
-				print("raw word aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-				for word in list_of_word:
-					print(word)		
-				return list_of_word
+
+				list_of_word = list(set(cleaned_string.split()))	
+				lowercase_word_list = [word.lower() for word in list_of_word]
+				return lowercase_word_list

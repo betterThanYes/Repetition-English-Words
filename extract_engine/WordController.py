@@ -1,12 +1,7 @@
 from WordModel import WordModel
 from typing import List
 from ExtractFileText import ExtractFileText
-from pattern.en import lexeme
-from pattern.en import pluralize, singularize
-from textblob import TextBlob
 import spacy
-# def convert_to_singular(plural_word):
-#     return singularize(plural_word)
 
 # # Example usage:
 # plural_word = input("Enter a plural word: ")
@@ -48,8 +43,32 @@ import spacy
 # 'WP': Wh-pronoun
 # 'WP$': Possessive wh-pronoun
 # 'WRB': Wh-adverb
-
-
+CONSTANT_MAP = {
+    "shouldn't": "should",
+    "couldn't": "could",
+    "didn't": "did",
+    "doesn't": "does",
+    "isn't": "is",
+    "aren't": "are",
+    "wasn't": "was",
+    "weren't": "were",
+    "haven't": "have",
+    "hasn't": "has",
+    "won't": "will",
+    "wouldn't": "would",
+    "don't": "do",
+    "doesn't": "does",
+    "didn't": "did",
+    "can't": "can",
+    "cannot": "can",
+    "i'm": "i",
+    "you're": "you",
+    "he's": "he",
+    "she's": "she",
+    "it's": "it",
+    "we're": "we",
+    "they're": "they",
+}
 def convert_word_to_good_format(word,nlp):
 	#Currently, I don't keep the irregular verb. I change all of verb to be verb base
     doc =nlp(word)
@@ -60,6 +79,12 @@ def convert_word_to_good_format(word,nlp):
     	case 'VBG'| 'VBZ' | 'VBD'|'VBN'|'NNS'|"NNPS" :
     		#print("Ved -Ving : " +word)
     		return doc[0].lemma_
+    	# case "PRP" | "MD":
+    	# 	word = word.lower()
+    	# 	if word in CONSTANT_MAP.keys():
+    	# 		return word
+    	# 	#print("PRP or MD: " + word +" " + CONSTANT_MAP[word])
+    	# 	return CONSTANT_MAP[word]
     	case _ : 
     		#print("Other type:" + word)
     		return word
@@ -82,18 +107,8 @@ def re_format_list_words(words:list[str])->set[str]:
 	# In comming update, I will update and make the re_format better
 	nlp = spacy.load("en_core_web_sm")
 	for i in range(len(words)):
-		if words[i] == "consultancy":
-			print("ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS: " + words[i])
 		words[i] = convert_word_to_good_format(words[i],nlp)
-		if words[i] == "consultancy":
-			print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB: " + words[i])
-		#words[i] = TextBlob(words[i]).correct() # recorrect the word
-		if words[i] == "consultancy":
-			print("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC: " + words[i])
+	with open("result_after_extract.txt", "w") as file:
+		for word in set(words):
+			file.write(word + "\n")
 	return set(words)
-
-#extract_each_word_from_file()
-test = extract_each_word_from_file("Cam18_Test_1_Reading_Part_1.txt")
-print("clean word: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-for word in test:
-	print(word)
