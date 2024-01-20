@@ -89,15 +89,15 @@ class AnkiGenerator:
   #       		{'name': 'CEFR Level'},
   #       		{'name': 'Example'},
   #       		{'name': 'Audio_Word'}
-list_dummy = [('def_word_1','type_word_1','word_1','phone_word_1','level_1','example_1','../music_image/love-us.mp3'),
-  				('def_word_2','type_word_2','word_2','phone_word_2','level_2','example_2','../music_image/hello-au.mp3')
-  			 ]
-anki_test = AnkiGenerator("My Deck Test 1")
-for word in list_dummy:
-	anki_test.create_note(word[0],word[1],word[2],word[3],word[4],word[5],word[6].replace("../music_image/",""))
-	anki_test.add_audio_file(audio_path = word[6])
-anki_test.create_apkg_file('output.apkg')
-anki_test.my_package.write_to_file('output.apkg')
+# list_dummy = [('def_word_1','type_word_1','word_1','phone_word_1','level_1','example_1','../music_image/love-us.mp3'),
+#   				('def_word_2','type_word_2','word_2','phone_word_2','level_2','example_2','../music_image/hello-au.mp3')
+#   			 ]
+# anki_test = AnkiGenerator("My Deck Test 1")
+# for word in list_dummy:
+# 	anki_test.create_note(word[0],word[1],word[2],word[3],word[4],word[5],word[6].replace("../music_image/",""))
+# 	anki_test.add_audio_file(audio_path = word[6])
+# anki_test.create_apkg_file('output.apkg')
+# anki_test.my_package.write_to_file('output.apkg')
 
 
 
